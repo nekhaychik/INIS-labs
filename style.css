@@ -78,18 +78,19 @@ body {
   text-decoration: none;
 }
 
+.active {
+  color: cornsilk;
+}
+
 .header__nav-item {
   font-family: "Roboto", sans-serif;
   text-align: center;
 }
 
 .nav__item-link:hover,
-.nav__item-link:focus {
-  opacity: 0.75;
-}
-
+.nav__item-link:focus,
 .nav__item-link:active {
-  color: cornsilk;
+  opacity: 0.75;
 }
 
 /* HEADER STYLES END */
