@@ -22,7 +22,6 @@ body {
 /* HEADER STYLES START */
 
 .header {
-  position: absolute;
   width: 100%;
   background: #FFFFFF;
 }
@@ -99,3 +98,11 @@ body {
 }
 
 /* HEADER STYLES END */
+
+/* INTRO STYLES START */
+
+.intro__image {
+  width: 100%;
+}
+
+/* INTRO STYLES END */
