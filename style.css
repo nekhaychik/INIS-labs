@@ -14,11 +14,6 @@ body {
   font-weight: normal;
 }
 
-.wrapper {
-  max-width: 1600px;
-  margin: 0 auto;
-}
-
 /* HEADER STYLES START */
 
 .header {
@@ -143,3 +138,38 @@ body {
 }
 
 /* INFORMATION STYLES END */
+
+/* FOOTER STYLES START */
+
+.footer__nav {
+  background: #140f50;
+}
+
+.footer__nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 57px;
+}
+
+.footer__item-link {
+  color: white;
+  text-decoration: none;
+}
+
+.footer__nav-item {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+.footer__item-link:hover,
+.footer__item-link:focus {
+  opacity: 0.75;
+}
+
+.footer__item-link:active {
+  color: #7594c2;
+}
+
+/* FOOTER STYLES END */
