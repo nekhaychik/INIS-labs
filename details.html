@@ -1,24 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INIS LAB1 - Details</title>
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Catamaran:wght@200;500&family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Your CSS Code -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <!-- JSON Shirt Object -->
+    <script src="shirts.js"></script>
+    <!-- Your JS Code -->
+    <script src="main.js"></script>
+  </head>
 
-  <title>INIS LAB1 - Details</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@200;500&family=Open+Sans&display=swap" rel="stylesheet">
-
-  <!-- Your CSS Code -->
-  <link rel="stylesheet" type="text/css" href="style.css">
-
-  <!-- JSON Shirt Object -->
-  <script src="shirts.js"></script>
-
-  <!-- Your JS Code -->
-  <script src="main.js"></script>
-</head>
-<body onload="initDetails()">
-  <!-- Your Code Here -->
-</body>
+  <body onload="initDetails()">
+    <header class="header">
+      <div class="header__logo">
+        <a href="/" class="header__logo-link">
+          <img
+            src="./site_images/logo.png"
+            alt="logo"
+            class="header__logo-pic"
+          />
+        </a>
+        <a href="/" class="header__logo-title">Инженерная психология (ИНИС)</a>
+      </div>
+      <nav class="header__nav">
+        <ul class="header__nav-list">
+          <li class="header__nav-item">
+            <a href="./products.html" class="nav__item-link">T-Shirts</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="./not_implemented.html" class="nav__item-link">Hoodies</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="./not_implemented.html" class="nav__item-link"
+              >Create Your Own</a
+            >
+          </li>
+          <li class="header__nav-item">
+            <a href="./not_implemented.html" class="nav__item-link">About Us</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="./not_implemented.html" class="nav__item-link"
+              >Your Account</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+  </body>
 </html>
