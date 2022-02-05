@@ -23,7 +23,7 @@ body {
 
 .header {
   width: 100%;
-  background: #FFFFFF;
+  background: #ffffff;
 }
 
 .header__logo {
@@ -106,3 +106,40 @@ body {
 }
 
 /* INTRO STYLES END */
+
+/* INFORMATION STYLES START */
+
+.inform {
+  display: grid;
+  grid-template-columns: 440px 440px;
+  grid-gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.inform__block {
+  border: 3px solid #140f50;
+  border-radius: 15px;
+  width: 440px;
+  height: 190px;
+  padding: 20px 45px;
+  display: grid;
+}
+
+.inform__title {
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.4px;
+  color: #140f50;
+  font-weight: 600;
+}
+
+.inform__paragraph {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  color: gray;
+}
+
+/* INFORMATION STYLES END */
