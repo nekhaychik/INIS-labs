@@ -1,1 +1,101 @@
-/* Your Code Here */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.wrapper {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* HEADER STYLES START */
+
+.header {
+  position: absolute;
+  width: 100%;
+  background: #FFFFFF;
+}
+
+.header__logo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 25px solid #140f50;
+  height: 100px;
+  padding: 10px 0;
+}
+
+.header__logo-link {
+  height: 100%;
+}
+
+.header__logo-pic {
+  height: 100%;
+}
+
+.header__logo-title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 77%;
+  color: #140f50;
+  text-decoration: none;
+  text-align: center;
+}
+
+.header__logo-link:hover,
+.header__logo-link:focus,
+.header__logo-link:active {
+  opacity: 0.75;
+}
+
+.header__logo-title:hover,
+.header__logo-title:focus,
+.header__logo-title:active {
+  opacity: 0.75;
+}
+
+.header__nav {
+  background: #7594c2;
+}
+
+.header__nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 57px;
+}
+
+.nav__item-link {
+  color: #140f50;
+  text-decoration: none;
+}
+
+.header__nav-item {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+.nav__item-link:hover,
+.nav__item-link:focus {
+  opacity: 0.75;
+}
+
+.nav__item-link:active {
+  color: cornsilk;
+}
+
+/* HEADER STYLES END */
