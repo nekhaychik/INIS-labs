@@ -173,3 +173,13 @@ body {
 }
 
 /* FOOTER STYLES END */
+
+/* NOT IMPLEMENTED PAGE STYLES START */
+
+.error__main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* NOT IMPLEMENTED PAGE STYLES END */
