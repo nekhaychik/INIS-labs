@@ -25,18 +25,26 @@ let initProducts = () => {
       </div>
     `;
   });
+
+  const seePageButtons = document.querySelectorAll(".button__see-page");
+  seePageButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      localStorage.setItem('indexOfShirt', `${button.id[button.id.length - 1]}`);
+    })
+  })
 };
 
 let initDetails = () => {
+  const indexOfShirt = localStorage.getItem('indexOfShirt');
   let obj = document.getElementById("app");
   let newDiv = document.createElement("div");
   newDiv.className = "details__container";
   let inDiv = obj.appendChild(newDiv);
   inDiv.innerHTML = `
-    <h1 class="details__title">${shirts[0].name}</h1>
-    <img src="${shirts[0].colors.white.front}" alt="T-Shirt image" class="details__image">
-    <p class="details__price">${shirts[0].price}</p>
-    <p class="details__description">${shirts[0].description}</p>
+    <h1 class="details__title">${shirts[indexOfShirt].name}</h1>
+    <img src="${shirts[indexOfShirt].colors.white.front}" alt="T-Shirt image" class="details__image">
+    <p class="details__price">${shirts[indexOfShirt].price}</p>
+    <p class="details__description">${shirts[indexOfShirt].description}</p>
     <div class="details__side">
       <p class="details__side-title">Side: </p>
       <button class="details__side-front" id="active-side">Front</button>
