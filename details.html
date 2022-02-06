@@ -18,7 +18,7 @@
     <script src="main.js"></script>
   </head>
 
-  <body>
+  <body onload="initDetails()">
     <header class="header">
       <div class="header__logo">
         <a href="/" class="header__logo-link">
@@ -55,7 +55,7 @@
       </nav>
     </header>
 
-    <main class="main-details" onload="initDetails()"></main>
+    <main class="main-details" id="app"></main>
 
     <footer class="footer">
       <nav class="footer__nav">
