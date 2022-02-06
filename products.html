@@ -18,7 +18,7 @@
     <script src="main.js"></script>
   </head>
 
-  <body>
+  <body onload="initProducts()">
     <header class="header">
       <div class="header__logo">
         <a href="/" class="header__logo-link">
@@ -55,7 +55,10 @@
       </nav>
     </header>
 
-    <main class="main-products" onload="initProducts()"></main>
+    <main class="main-products">
+      <h1 class="products__title">Our T-Shirts</h1>
+      <div class="products__container" id="app"></div>
+    </main>
 
     <footer class="footer">
       <nav class="footer__nav">
