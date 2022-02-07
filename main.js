@@ -153,6 +153,7 @@ function createProductDetails(indexOfShirt) {
   newDiv.className = "details__container";
   const inDiv = obj.appendChild(newDiv);
   localStorage.setItem("activeColor", "white");
+  localStorage.setItem("activeSide", "front");
   inDiv.innerHTML = `
     <h1 class="details__title">${shirts[indexOfShirt].name}</h1>
     <img src="${shirts[indexOfShirt].colors.white.front}" alt="T-Shirt image" class="details__image">
