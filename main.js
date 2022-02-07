@@ -1,10 +1,31 @@
 // NOTE: The variable "shirts" is defined in the shirts.js file as the full list of shirt offerings
 //       You can access this variable here, and should use this variable here to build your webpages
 let initProducts = () => {
+  checkDataOfProductIsExist();
   createProductCards();
   handlerSeePageButton();
   handlerQuickViewButton();
 };
+
+function checkDataOfProductIsExist() {
+  shirts.forEach((shirt) => {
+    if (!shirt.colors) {
+      shirt.colors = { white: { front: "shirt_images/default-w-front.png" } };
+    }
+    if (!shirt.colors.white) {
+      shirt.colors.white = { front: "shirt_images/default-w-front.png" };
+    }
+    if (!shirt.colors.white.front) {
+      shirt.colors.white.front = "shirt_images/default-w-front.png";
+    }
+    if (!shirt.name) {
+      shirt.name = "No name";
+    }
+    if (!shirt.price) {
+      shirt.price = "No price";
+    }
+  });
+}
 
 function createProductCards() {
   let count = 0;
@@ -39,7 +60,7 @@ function handlerSeePageButton() {
     button.addEventListener("click", () => {
       localStorage.setItem(
         "indexOfShirt",
-        `${button.id[button.id.length - 1]}`
+        `${button.id.replace("details__link-", "")}`
       );
     });
   });
@@ -51,7 +72,7 @@ function handlerQuickViewButton() {
     button.addEventListener("click", () => {
       localStorage.setItem(
         "indexOfShirt",
-        `${button.id[button.id.length - 1]}`
+        `${button.id.replace("quickView__button-", "")}`
       );
       createModalWindow();
     });
@@ -87,6 +108,7 @@ function handlerCloseButton() {
 
 let initDetails = () => {
   const indexOfShirt = localStorage.getItem("indexOfShirt");
+  checkDetailsOfProductIsExist(indexOfShirt);
   createProductDetails(indexOfShirt);
   handlerFrontButton(indexOfShirt);
   handlerBackButton(indexOfShirt);
@@ -94,12 +116,43 @@ let initDetails = () => {
   handlerColorButtons(indexOfShirt);
 };
 
+function checkDetailsOfProductIsExist(indexOfShirt) {
+  if (!shirts[indexOfShirt].name) {
+    shirts[indexOfShirt].name = "No name";
+  }
+  if (!shirts[indexOfShirt].colors) {
+    shirts[indexOfShirt].colors = {
+      white: {
+        front: "shirt_images/default-w-front.png",
+        back: "shirt_images/default-w-back.png",
+      },
+    };
+  }
+  if (!shirts[indexOfShirt].colors.white) {
+    shirts[indexOfShirt].colors.white = {
+      front: "shirt_images/default-w-front.png",
+      back: "shirt_images/default-w-back.png",
+    };
+  }
+  if (!shirts[indexOfShirt].colors.white.front) {
+    shirts[indexOfShirt].colors.white.front =
+      "shirt_images/default-w-front.png";
+    shirts[indexOfShirt].colors.white.back = "shirt_images/default-w-back.png";
+  }
+  if (!shirts[indexOfShirt].price) {
+    shirts[indexOfShirt].price = "No price";
+  }
+  if (!shirts[indexOfShirt].description) {
+    shirts[indexOfShirt].description = "No description";
+  }
+}
+
 function createProductDetails(indexOfShirt) {
   const obj = document.getElementById("app");
   const newDiv = document.createElement("div");
   newDiv.className = "details__container";
   const inDiv = obj.appendChild(newDiv);
-  localStorage.setItem('activeColor', 'white');
+  localStorage.setItem("activeColor", "white");
   inDiv.innerHTML = `
     <h1 class="details__title">${shirts[indexOfShirt].name}</h1>
     <img src="${shirts[indexOfShirt].colors.white.front}" alt="T-Shirt image" class="details__image">
@@ -140,9 +193,10 @@ function handlerColorButtons(indexOfShirt) {
         `${color.getAttribute("class").replace("details__color-", "")}`
       );
       const currentColor = localStorage.getItem("activeColor");
+      const currentSide = localStorage.getItem("activeSide");
       image.setAttribute(
         "src",
-        `${shirts[indexOfShirt].colors[currentColor].front}`
+        `${shirts[indexOfShirt].colors[currentColor][currentSide]}`
       );
     });
   });
@@ -153,6 +207,7 @@ function handlerFrontButton(indexOfShirt) {
   const backButton = document.querySelector(".details__side-back");
   const image = document.querySelector(".details__image");
   frontButton.addEventListener("click", () => {
+    localStorage.setItem("activeSide", "front");
     frontButton.id = "active-side";
     backButton.removeAttribute("id");
     image.setAttribute(
@@ -169,6 +224,7 @@ function handlerBackButton(indexOfShirt) {
   const backButton = document.querySelector(".details__side-back");
   const image = document.querySelector(".details__image");
   backButton.addEventListener("click", () => {
+    localStorage.setItem("activeSide", "back");
     backButton.id = "active-side";
     frontButton.removeAttribute("id");
     image.setAttribute(

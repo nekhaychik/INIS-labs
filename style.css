@@ -438,7 +438,7 @@ body {
 /* MODAL WINDOW (QUICK VIEW) STYLES START */
 
 .modal-window {
-  position: absolute;
+  position: fixed;
   left: 35%;
   top: 24%;
   width: 400px;
