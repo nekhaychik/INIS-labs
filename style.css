@@ -425,45 +425,77 @@ body {
 
 /* MAIN DETAILS STYLES END */
 
-
 /* MODAL WINDOW (QUICK VIEW) STYLES START */
 
 .modal-window {
   position: absolute;
-  left: 40%;
-  top: 30%;
-  width: 500px;
-  height: 500px;
+  left: 35%;
+  top: 24%;
+  width: 400px;
+  height: 400px;
   display: grid;
   grid-template-areas:
-  ". closeModal"
-  "imageModal nameModal"
-  "imageModal priceModal"
-  "closeButtonModal seeButtonModal";
+    ". closeModal"
+    "imageModal nameModal"
+    "imageModal priceModal"
+    "closeButtonModal seeButtonModal";
+  background-color: #7594c2;
 }
 
 #modal-window__close {
   grid-area: closeModal;
+  width: 25px;
+  height: 25px;
+  margin: 5px;
+  background: rgb(180, 52, 52);
+  justify-self: flex-end;
 }
 
 #modal-window__image {
   grid-area: imageModal;
+  height: 250px;
+  justify-self: center;
+  border: 1px solid #140f50;
 }
 
 #modal-window__name {
   grid-area: nameModal;
+  align-self: center;
+  font-family: "Roboto", sans-serif;
+  color: #140f50;
+  font-size: 20px;
 }
 
 #modal-window__price {
   grid-area: priceModal;
+  font-family: "Roboto", sans-serif;
+  color: #140f50;
 }
 
 #modal-window__button-close {
   grid-area: closeButtonModal;
+  width: 100px;
+  height: 30px;
+  font-family: "Roboto", sans-serif;
+  color: #140f50;
+  justify-self: flex-end;
+  border: 1px solid #140f50;
 }
 
 #modal-window__button-see {
   grid-area: seeButtonModal;
+  display: block;
+  width: 100px;
+  padding: 6px;
+  justify-self: center;
+  background-color: #140f50;
+  color: white;
+  border: 1px solid white;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  text-align: center;
+  align-self: flex-start;
+  justify-self: center;
 }
 
 /* MODAL WINDOW (QUICK VIEW) STYLES END */

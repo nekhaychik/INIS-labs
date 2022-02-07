@@ -1,12 +1,18 @@
 // NOTE: The variable "shirts" is defined in the shirts.js file as the full list of shirt offerings
 //       You can access this variable here, and should use this variable here to build your webpages
 let initProducts = () => {
+  createProductCards();
+  handlerSeePageButton();
+  handlerQuickViewButton();
+};
+
+function createProductCards() {
   let count = 0;
   shirts.forEach((shirt) => {
-    let obj = document.getElementById("app");
-    let newDiv = document.createElement("div");
+    const obj = document.getElementById("app");
+    const newDiv = document.createElement("div");
     newDiv.className = "product__card";
-    let inDiv = obj.appendChild(newDiv);
+    const inDiv = obj.appendChild(newDiv);
     inDiv.innerHTML = `
       <a href="./details.html">
         <img src="${
@@ -25,24 +31,62 @@ let initProducts = () => {
       </div>
     `;
   });
+}
 
+function handlerSeePageButton() {
   const seePageButtons = document.querySelectorAll(".button__see-page");
   seePageButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      localStorage.setItem('indexOfShirt', `${button.id[button.id.length - 1]}`);
+    button.addEventListener("click", () => {
+      localStorage.setItem(
+        "indexOfShirt",
+        `${button.id[button.id.length - 1]}`
+      );
     });
   });
+}
 
-  const quickViewButtons = document.querySelectorAll('.button__quick-view');
+function handlerQuickViewButton() {
+  const quickViewButtons = document.querySelectorAll(".button__quick-view");
   quickViewButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      
+    button.addEventListener("click", () => {
+      localStorage.setItem(
+        "indexOfShirt",
+        `${button.id[button.id.length - 1]}`
+      );
+      createModalWindow();
     });
   });
-};
+}
+
+function createModalWindow() {
+  const indexOfShirt = localStorage.getItem("indexOfShirt");
+  const obj = document.getElementById("main");
+  const newDiv = document.createElement("div");
+  newDiv.className = "modal-window";
+  const inDiv = obj.appendChild(newDiv);
+  inDiv.innerHTML = `
+    <button id="modal-window__close" class="close">x</button>
+    <img src="${shirts[indexOfShirt].colors.white.front}" alt="T-Shirt image" id="modal-window__image">
+    <p id="modal-window__name">${shirts[indexOfShirt].name}</p>
+    <p id="modal-window__price">${shirts[indexOfShirt].price}</p>
+    <button id="modal-window__button-close" class="close">Close</button>
+    <a href="./details.html" id="modal-window__button-see">See Page</a>
+  `;
+  handlerCloseButton();
+}
+
+function handlerCloseButton() {
+  const closeButtons = document.querySelectorAll(".close");
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const modalWindowContainer = document.querySelector(".modal-window");
+      modalWindowContainer.remove();
+    });
+  });
+}
 
 let initDetails = () => {
-  const indexOfShirt = localStorage.getItem('indexOfShirt');
+  const indexOfShirt = localStorage.getItem("indexOfShirt");
   let obj = document.getElementById("app");
   let newDiv = document.createElement("div");
   newDiv.className = "details__container";
