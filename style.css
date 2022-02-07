@@ -424,3 +424,46 @@ body {
 }
 
 /* MAIN DETAILS STYLES END */
+
+
+/* MODAL WINDOW (QUICK VIEW) STYLES START */
+
+.modal-window {
+  position: absolute;
+  left: 40%;
+  top: 30%;
+  width: 500px;
+  height: 500px;
+  display: grid;
+  grid-template-areas:
+  ". closeModal"
+  "imageModal nameModal"
+  "imageModal priceModal"
+  "closeButtonModal seeButtonModal";
+}
+
+#modal-window__close {
+  grid-area: closeModal;
+}
+
+#modal-window__image {
+  grid-area: imageModal;
+}
+
+#modal-window__name {
+  grid-area: nameModal;
+}
+
+#modal-window__price {
+  grid-area: priceModal;
+}
+
+#modal-window__button-close {
+  grid-area: closeButtonModal;
+}
+
+#modal-window__button-see {
+  grid-area: seeButtonModal;
+}
+
+/* MODAL WINDOW (QUICK VIEW) STYLES END */

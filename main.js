@@ -18,7 +18,7 @@ let initProducts = () => {
         Object.keys(shirt.colors).length
       } colors</p>
       <div class="card__buttons-container">
-        <button class="card__button" id="quickView__button-${count}">Quick View</button>
+        <button class="card__button button__quick-view" id="quickView__button-${count}">Quick View</button>
         <a href="./details.html" id="details__link-${count++}" class="button__see-page">
           <button class="card__button">See Page</button>
         </a>
@@ -30,8 +30,15 @@ let initProducts = () => {
   seePageButtons.forEach((button) => {
     button.addEventListener('click', () => {
       localStorage.setItem('indexOfShirt', `${button.id[button.id.length - 1]}`);
-    })
-  })
+    });
+  });
+
+  const quickViewButtons = document.querySelectorAll('.button__quick-view');
+  quickViewButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      
+    });
+  });
 };
 
 let initDetails = () => {
