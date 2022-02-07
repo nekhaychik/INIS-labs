@@ -87,11 +87,18 @@ function handlerCloseButton() {
 
 let initDetails = () => {
   const indexOfShirt = localStorage.getItem("indexOfShirt");
+  createProductDetails(indexOfShirt);
+  handlerFrontButton(indexOfShirt);
+  handlerBackButton(indexOfShirt);
+  addColorButtons(indexOfShirt);
+  handlerColorButtons(indexOfShirt);
+};
+
+function createProductDetails(indexOfShirt) {
   const obj = document.getElementById("app");
   const newDiv = document.createElement("div");
   newDiv.className = "details__container";
   const inDiv = obj.appendChild(newDiv);
-  let activeColor = "white";
   inDiv.innerHTML = `
     <h1 class="details__title">${shirts[indexOfShirt].name}</h1>
     <img src="${shirts[indexOfShirt].colors.white.front}" alt="T-Shirt image" class="details__image">
@@ -112,21 +119,35 @@ let initDetails = () => {
       <button class="details__color-yellow">Yellow</button>
     </div>
   `;
-  handlerFrontButton(indexOfShirt, activeColor);
-  handlerBackButton(indexOfShirt, activeColor);
-  console.log(Object.keys(shirts[indexOfShirt].colors));
-  addColorButtons(indexOfShirt);
-};
+}
 
 function addColorButtons(indexOfShirt) {
   const colors = Object.keys(shirts[indexOfShirt].colors);
   colors.forEach((color) => {
     const colorButton = document.querySelector(`.details__color-${color}`);
-    colorButton.id = 'active-color';
-  })
+    colorButton.id = "active-color";
+  });
 }
 
-function handlerFrontButton(indexOfShirt, activeColor) {
+function handlerColorButtons(indexOfShirt) {
+  const activeColors = document.querySelectorAll("#active-color");
+  const image = document.querySelector(".details__image");
+  activeColors.forEach((color) => {
+    color.addEventListener("click", () => {
+      localStorage.setItem(
+        "activeColor",
+        `${color.getAttribute("class").replace("details__color-", "")}`
+      );
+      const currentColor = localStorage.getItem("activeColor");
+      image.setAttribute(
+        "src",
+        `${shirts[indexOfShirt].colors[currentColor].front}`
+      );
+    });
+  });
+}
+
+function handlerFrontButton(indexOfShirt) {
   const frontButton = document.querySelector(".details__side-front");
   const backButton = document.querySelector(".details__side-back");
   const image = document.querySelector(".details__image");
@@ -135,12 +156,14 @@ function handlerFrontButton(indexOfShirt, activeColor) {
     backButton.removeAttribute("id");
     image.setAttribute(
       "src",
-      `${shirts[indexOfShirt].colors[activeColor].front}`
+      `${
+        shirts[indexOfShirt].colors[localStorage.getItem("activeColor")].front
+      }`
     );
   });
 }
 
-function handlerBackButton(indexOfShirt, activeColor) {
+function handlerBackButton(indexOfShirt) {
   const frontButton = document.querySelector(".details__side-front");
   const backButton = document.querySelector(".details__side-back");
   const image = document.querySelector(".details__image");
@@ -149,7 +172,7 @@ function handlerBackButton(indexOfShirt, activeColor) {
     frontButton.removeAttribute("id");
     image.setAttribute(
       "src",
-      `${shirts[indexOfShirt].colors[activeColor].back}`
+      `${shirts[indexOfShirt].colors[localStorage.getItem("activeColor")].back}`
     );
   });
 }
