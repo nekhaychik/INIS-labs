@@ -357,6 +357,10 @@ body {
   grid-gap: 10px;
 }
 
+#active-color {
+  display: block;
+}
+
 .details__color-title {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
@@ -371,6 +375,7 @@ body {
   border: 1px solid #140f50;
   border-radius: 15px;
   padding: 8px;
+  display: none;
 }
 
 .details__color-blue {
@@ -379,6 +384,7 @@ body {
   border: 1px solid #140f50;
   border-radius: 15px;
   padding: 8px;
+  display: none;
 }
 
 .details__color-pink {
@@ -387,6 +393,7 @@ body {
   border: 1px solid #140f50;
   border-radius: 15px;
   padding: 8px;
+  display: none;
 }
 
 .details__color-red {
@@ -395,6 +402,7 @@ body {
   border: 1px solid #140f50;
   border-radius: 15px;
   padding: 8px;
+  display: none;
 }
 
 .details__color-green {
@@ -403,6 +411,7 @@ body {
   border: 1px solid #140f50;
   border-radius: 15px;
   padding: 8px;
+  display: none;
 }
 
 .details__color-yellow {
@@ -411,6 +420,7 @@ body {
   border: 1px solid #140f50;
   border-radius: 15px;
   padding: 8px;
+  display: none;
 }
 
 .details__color-blue:hover,

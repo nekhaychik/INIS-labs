@@ -87,10 +87,11 @@ function handlerCloseButton() {
 
 let initDetails = () => {
   const indexOfShirt = localStorage.getItem("indexOfShirt");
-  let obj = document.getElementById("app");
-  let newDiv = document.createElement("div");
+  const obj = document.getElementById("app");
+  const newDiv = document.createElement("div");
   newDiv.className = "details__container";
-  let inDiv = obj.appendChild(newDiv);
+  const inDiv = obj.appendChild(newDiv);
+  let activeColor = "white";
   inDiv.innerHTML = `
     <h1 class="details__title">${shirts[indexOfShirt].name}</h1>
     <img src="${shirts[indexOfShirt].colors.white.front}" alt="T-Shirt image" class="details__image">
@@ -111,4 +112,44 @@ let initDetails = () => {
       <button class="details__color-yellow">Yellow</button>
     </div>
   `;
+  handlerFrontButton(indexOfShirt, activeColor);
+  handlerBackButton(indexOfShirt, activeColor);
+  console.log(Object.keys(shirts[indexOfShirt].colors));
+  addColorButtons(indexOfShirt);
 };
+
+function addColorButtons(indexOfShirt) {
+  const colors = Object.keys(shirts[indexOfShirt].colors);
+  colors.forEach((color) => {
+    const colorButton = document.querySelector(`.details__color-${color}`);
+    colorButton.id = 'active-color';
+  })
+}
+
+function handlerFrontButton(indexOfShirt, activeColor) {
+  const frontButton = document.querySelector(".details__side-front");
+  const backButton = document.querySelector(".details__side-back");
+  const image = document.querySelector(".details__image");
+  frontButton.addEventListener("click", () => {
+    frontButton.id = "active-side";
+    backButton.removeAttribute("id");
+    image.setAttribute(
+      "src",
+      `${shirts[indexOfShirt].colors[activeColor].front}`
+    );
+  });
+}
+
+function handlerBackButton(indexOfShirt, activeColor) {
+  const frontButton = document.querySelector(".details__side-front");
+  const backButton = document.querySelector(".details__side-back");
+  const image = document.querySelector(".details__image");
+  backButton.addEventListener("click", () => {
+    backButton.id = "active-side";
+    frontButton.removeAttribute("id");
+    image.setAttribute(
+      "src",
+      `${shirts[indexOfShirt].colors[activeColor].back}`
+    );
+  });
+}
