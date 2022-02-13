@@ -61,6 +61,71 @@ body {
   opacity: 0.75;
 }
 
+.header__burger {
+  position: relative;
+  width: 18px;
+  height: 10px;
+  display: none;
+}
+
+.header__burger:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.burger__line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  display: block;
+  background-color: #140f50;
+  border-radius: 1px;
+  grid-gap: 2px;
+}
+
+.burger__line:last-child {
+  margin-bottom: 0;
+}
+
+.burger__line-1 {
+  top: 0;
+}
+
+.burger__line-2 {
+  top: 4px;
+}
+
+.burger__line-3 {
+  bottom: 0;
+}
+
+.burger__nav {
+  background: #7594c2;
+  width: auto;
+  padding: 10px 30px;
+  position: absolute;
+  right: 0;
+  top: 25px;
+  display: none;
+}
+
+.burger__nav-list {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.burger__nav-item {
+  font-family: "Roboto", sans-serif;
+  text-align: right;
+  padding: 10px 0;
+}
+
+.burger__nav-item:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
 .header__nav {
   background: #7594c2;
 }
@@ -271,7 +336,7 @@ body {
 }
 
 .details__container {
-  margin: 50px 0;
+  margin: 50px 20px;
   display: grid;
   grid-template-areas:
     "title title"
@@ -355,6 +420,7 @@ body {
   display: flex;
   align-items: center;
   grid-gap: 10px;
+  flex-wrap: wrap;
 }
 
 #active-color {
@@ -439,8 +505,10 @@ body {
 
 .modal-window {
   position: fixed;
-  left: 35%;
-  top: 24%;
+  left: 50%;
+  margin-left: -200px;
+  top: 50%;
+  margin-top: -200px;
   width: 400px;
   height: 400px;
   display: grid;
@@ -509,3 +577,186 @@ body {
 }
 
 /* MODAL WINDOW (QUICK VIEW) STYLES END */
+
+@media screen and (min-width: 640px) and (max-width: 999px) {
+  /* HEADER STYLES START (SCREEN 640-999) */
+
+  .header__logo {
+    justify-content: space-between;
+    padding: 0 15px;
+    height: 65px;
+  }
+
+  .header__logo-title {
+    font-size: 26px;
+  }
+
+  .header__burger {
+    display: block;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  /* HEADER STYLES END (SCREEN 640-999) */
+
+  /* INFORMATION STYLES START (SCREEN 640-999) */
+
+  .inform {
+    grid-template-columns: 300px 300px;
+  }
+
+  .inform__block {
+    width: 300px;
+    height: auto;
+  }
+
+  .inform__title {
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .inform__paragraph {
+    line-height: 1.2;
+  }
+
+  /* INFORMATION STYLES END (SCREEN 640-999) */
+}
+
+@media screen and (min-width: 320px) and (max-width: 639px) {
+  /* HEADER STYLES START (SCREEN 320-639) */
+
+  .header__logo {
+    justify-content: space-between;
+    padding: 0 15px;
+    height: 65px;
+  }
+
+  .header__logo-title {
+    display: none;
+  }
+
+  .header__burger {
+    display: block;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  /* HEADER STYLES END (SCREEN 320-639) */
+
+  /* INFORMATION STYLES START (SCREEN 320-639) */
+
+  .inform {
+    grid-template-columns: 300px;
+  }
+
+  .inform__block {
+    width: 300px;
+    height: auto;
+    padding: 15px 30px;
+  }
+
+  .inform__title {
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .inform__paragraph {
+    line-height: 1;
+  }
+
+  /* INFORMATION STYLES END (SCREEN 640-999) */
+
+  /* FOOTER STYLES START (SCREEN 320-639) */
+
+  .footer__nav-list {
+    display: grid;
+    grid-template-areas:
+      "contact-us . site-map . privacy-policy"
+      ". careers . reviews .";
+    grid-gap: 20px 0px;
+    height: auto;
+    padding: 20px;
+  }
+
+  .footer__item-link {
+    font-size: 12px;
+  }
+
+  .contact-us {
+    grid-area: contact-us;
+  }
+
+  .site-map {
+    grid-area: site-map;
+  }
+
+  .privacy-policy {
+    grid-area: privacy-policy;
+  }
+
+  .careers {
+    grid-area: careers;
+  }
+
+  .reviews {
+    grid-area: reviews;
+  }
+
+  /* FOOTER STYLES END (SCREEN 320-639) */
+
+  /* MAIN PRODUCTS STYLES START (screen 320-639) */
+
+  .products__title {
+    text-align: center;
+  }
+
+  .products__container {
+    justify-content: center;
+  }
+
+  /* MAIN PRODUCTS STYLES END (screen 320-639) */
+
+  /* MODAL WINDOW (QUICK VIEW) STYLES START (SCREEN 320-639)*/
+
+  .modal-window {
+    margin-left: -150px;
+    margin-top: -150px;
+    width: 300px;
+    height: 300px;
+  }
+
+  #modal-window__image {
+    height: 180px;
+  }
+
+  #modal-window__button-close {
+    width: 80px;
+    height: 27px;
+    font-size: 13px;
+  }
+
+  #modal-window__button-see {
+    width: 80px;
+    font-size: 13px;
+  }
+
+  /* MODAL WINDOW (QUICK VIEW) STYLES END (SCREEN 320-639)*/
+
+  /* MAIN DETAILS STYLES START (SCREEN 320-639) */
+
+  .details__container {
+    grid-template-areas:
+      "title title"
+      "image ."
+      "price ."
+      "description ."
+      "side ."
+      "color .";
+  }
+
+  /* MAIN DETAILS STYLES END (SCREEN 320-639) */
+}

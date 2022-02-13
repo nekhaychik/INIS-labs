@@ -234,3 +234,13 @@ function handlerBackButton(indexOfShirt) {
     );
   });
 }
+
+function handlerBurgerMenuButton() {
+  const burgerMenu = document.querySelector(".burger__nav");
+  burgerMenu.style.display = "block";
+}
+
+function handlerCloseBurgerMenuButton() {
+  const burgerMenu = document.querySelector(".burger__nav");
+  burgerMenu.style.display = "none";
+}
