@@ -162,6 +162,10 @@ body {
 
 /* INTRO STYLES START */
 
+.main {
+  min-height: calc(100vh - 157px - 57px);
+}
+
 .intro__title {
   display: none;
 }
@@ -259,6 +263,7 @@ body {
 .main-products {
   max-width: 1100px;
   margin: 0 auto;
+  min-height: calc(100vh - 157px - 77px);
 }
 
 .products__title {
@@ -337,6 +342,7 @@ body {
 .main-details {
   max-width: 800px;
   margin: 0 auto;
+  min-height: calc(100vh - 157px - 107px);
 }
 
 .details__container {
@@ -607,6 +613,10 @@ body {
 
   /* INFORMATION STYLES START (SCREEN 640-999) */
 
+  .main {
+    min-height: calc(100vh - 65px - 57px);
+  }
+
   .inform {
     grid-template-columns: 300px 300px;
   }
@@ -626,6 +636,20 @@ body {
   }
 
   /* INFORMATION STYLES END (SCREEN 640-999) */
+
+  /* MAIN PRODUCTS STYLES START (SCREEN 640-999) */
+
+  .main-products {
+    min-height: calc(100vh - 85px - 57px);
+  }
+
+  /* MAIN PRODUCTS STYLES END (SCREEN 640-999) */
+
+  .main-details {
+    min-height: calc(100vh - 115px - 57px);
+  }
+
+  /* MAIN DETAILS STYLES END (SCREEN 320-639) */
 }
 
 @media screen and (min-width: 320px) and (max-width: 639px) {
@@ -652,6 +676,10 @@ body {
   /* HEADER STYLES END (SCREEN 320-639) */
 
   /* INFORMATION STYLES START (SCREEN 320-639) */
+
+  .main {
+    min-height: calc(100vh - 65px - 92px);
+  }
 
   .inform {
     grid-template-columns: 300px;
@@ -712,7 +740,11 @@ body {
 
   /* FOOTER STYLES END (SCREEN 320-639) */
 
-  /* MAIN PRODUCTS STYLES START (screen 320-639) */
+  /* MAIN PRODUCTS STYLES START (SCREEN 320-639) */
+
+  .main-products {
+    min-height: calc(100vh - 85px - 92px);
+  }
 
   .products__title {
     text-align: center;
@@ -722,7 +754,7 @@ body {
     justify-content: center;
   }
 
-  /* MAIN PRODUCTS STYLES END (screen 320-639) */
+  /* MAIN PRODUCTS STYLES END (SCREEN 320-639) */
 
   /* MODAL WINDOW (QUICK VIEW) STYLES START (SCREEN 320-639)*/
 
@@ -751,6 +783,10 @@ body {
   /* MODAL WINDOW (QUICK VIEW) STYLES END (SCREEN 320-639)*/
 
   /* MAIN DETAILS STYLES START (SCREEN 320-639) */
+
+  .main-details {
+    min-height: calc(100vh - 115px - 92px);
+  }
 
   .details__container {
     grid-template-areas:
