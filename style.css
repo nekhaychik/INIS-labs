@@ -162,6 +162,10 @@ body {
 
 /* INTRO STYLES START */
 
+.intro__title {
+  display: none;
+}
+
 .intro__image {
   width: 100%;
 }
@@ -253,7 +257,7 @@ body {
 /* MAIN PRODUCTS STYLES START */
 
 .main-products {
-  max-width: 1160px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
