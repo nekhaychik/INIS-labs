@@ -1,8 +1,16 @@
-/*
-* all the code for laboratory work 2 goes into this file.
-You will attach event handlers to the document, workspace, and targets defined in the html file
-to handle mouse, touch and possible other events.
+let selectedDiv;
+const workspace = document.getElementById("workspace");
 
-You will certainly need a large number of global variables to keep track of the current modes and states
-of the interaction.
-*/
+workspace.onclick = function (event) {
+  let target = event.target.closest(".target");
+  if (!target) return;
+  changeColorToBlue(target);
+};
+
+function changeColorToBlue(div) {
+  if (selectedDiv) {
+    selectedDiv.classList.remove("selected");
+  }
+  selectedDiv = div;
+  selectedDiv.classList.add("selected");
+}
