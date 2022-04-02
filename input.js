@@ -1,56 +1,123 @@
+const BLUE_BACKGROUND = "selected";
+const YELLOW_BACKGROUND = "dbSelected";
+const TARGET_CLASS = ".target";
+
 let selectedDiv;
+let currentDiv;
+
 const workspace = document.getElementById("workspace");
-const divs = document.querySelectorAll(".target");
 
-workspace.addEventListener("click", clickHandler);
+let isSingleClick = true;
+let isMouseDown = true;
+let temp = 0;
 
-divs.forEach((div) => {
-  div.onmousedown = function (event) {
-    let temp = 0;
-
-    div.style.position = "absolute";
-    div.style.zIndex = "1000";
-    document.body.append(div);
-
-    let shiftX = event.clientX - div.getBoundingClientRect().left;
-    let shiftY = event.clientY - div.getBoundingClientRect().top;
-
-    function moveAt(pageX, pageY) {
-      div.style.left = pageX - shiftX + "px";
-      div.style.top = pageY - shiftY + "px";
-      temp++;
+workspace.onmousedown = function (event) {
+  setTimeout(function () {
+    if (isMouseDown) {
+      let target = event.target.closest(TARGET_CLASS);
+      if (!target) return;
+      moveDiv(event);
     }
+  }, 300);
+};
 
-    function onMouseMove(event) {
-      moveAt(event.pageX, event.pageY);
+workspace.onclick = function (event) {
+  isMouseDown = false;
+  setTimeout(function () {
+    if (isSingleClick) {
+      clickHandler(event);
+      isMouseDown = true;
     }
+  }, 300);
+};
 
-    document.addEventListener("mousemove", onMouseMove);
+workspace.ondblclick = function (event) {
+  dbClickHandler(event);
+  isSingleClick = false;
+  setTimeout(function () {
+    let target = event.target.closest(TARGET_CLASS);
+    if (!target) return;
+    followCursor(event);
+    isSingleClick = true;
+    isMouseDown = true;
+  }, 300);
+};
 
-    div.onmouseup = function () {
-      document.removeEventListener("mousemove", onMouseMove);
-      div.onmouseup = null;
-      workspace.append(div);
-      if (temp === 0) clickHandler(event);
-    };
+function moveDiv(event) {
+  event.target.style.position = "absolute";
+  event.target.style.zIndex = "1000";
+  document.body.append(event.target);
+
+  let shiftX = event.clientX - event.target.getBoundingClientRect().left;
+  let shiftY = event.clientY - event.target.getBoundingClientRect().top;
+
+  function moveAt(pageX, pageY) {
+    event.target.style.left = pageX - shiftX + "px";
+    event.target.style.top = pageY - shiftY + "px";
+    temp++;
+  }
+
+  function onMouseMove(event) {
+    moveAt(event.pageX, event.pageY);
+  }
+
+  document.addEventListener("mousemove", onMouseMove);
+
+  event.target.onmouseup = function () {
+    document.removeEventListener("mousemove", onMouseMove);
+    event.target.onmouseup = null;
+    workspace.append(event.target);
+    if (temp === 0) clickHandler(event);
+    temp = 0;
   };
-});
+}
+
+function followCursor(event) {
+  event.target.style.position = "absolute";
+  event.target.style.zIndex = "1000";
+  document.body.append(event.target);
+
+  let shiftX = event.clientX - event.target.getBoundingClientRect().left;
+  let shiftY = event.clientY - event.target.getBoundingClientRect().top;
+
+  function moveAt(pageX, pageY) {
+    event.target.style.left = pageX - shiftX + "px";
+    event.target.style.top = pageY - shiftY + "px";
+  }
+
+  function onMouseMove(event) {
+    moveAt(event.pageX, event.pageY);
+  }
+
+  document.addEventListener("mousemove", onMouseMove);
+}
 
 function clickHandler(event) {
-  let target = event.target.closest(".target");
+  let target = event.target.closest(TARGET_CLASS);
   if (!target) {
     if (selectedDiv) {
-      selectedDiv.classList.remove("selected");
+      selectedDiv.classList.remove(BLUE_BACKGROUND);
     }
     return;
   }
-  changeColorToBlue(target);
+  changeColorClick(target);
 }
 
-function changeColorToBlue(div) {
+function dbClickHandler(event) {
+  let target = event.target.closest(TARGET_CLASS);
+  if (!target) return;
+  changeColorDbClick(target);
+}
+
+function changeColorDbClick(div) {
+  currentDiv = div;
+  currentDiv.classList.add(YELLOW_BACKGROUND);
+}
+
+function changeColorClick(div) {
   if (selectedDiv) {
-    selectedDiv.classList.remove("selected");
+    selectedDiv.classList.remove(BLUE_BACKGROUND);
   }
   selectedDiv = div;
-  selectedDiv.classList.add("selected");
+  selectedDiv.classList.add(BLUE_BACKGROUND);
 }

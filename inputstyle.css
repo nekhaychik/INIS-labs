@@ -30,3 +30,7 @@ body {
 .selected {
   background-color: blue;
 }
+
+.dbSelected {
+  background-color: yellow;
+}
