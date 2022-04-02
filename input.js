@@ -3,7 +3,12 @@ const workspace = document.getElementById("workspace");
 
 workspace.onclick = function (event) {
   let target = event.target.closest(".target");
-  if (!target) return;
+  if (!target) {
+    if (selectedDiv) {
+      selectedDiv.classList.remove("selected");
+    }
+    return;
+  }
   changeColorToBlue(target);
 };
 
