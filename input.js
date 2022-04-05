@@ -37,7 +37,7 @@ workspace.ondblclick = function (event) {
   setTimeout(function () {
     let target = event.target.closest(TARGET_CLASS);
     if (!target) return;
-    followCursor(event);
+    moveDiv(event);
     isSingleClick = true;
     isMouseDown = true;
   }, 300);
@@ -68,28 +68,11 @@ function moveDiv(event) {
     event.target.onmouseup = null;
     workspace.append(event.target);
     if (temp === 0) clickHandler(event);
+    if(event.target.classList.contains(YELLOW_BACKGROUND)) {
+      event.target.classList.remove(YELLOW_BACKGROUND);
+    }
     temp = 0;
   };
-}
-
-function followCursor(event) {
-  event.target.style.position = "absolute";
-  event.target.style.zIndex = "1000";
-  document.body.append(event.target);
-
-  let shiftX = event.clientX - event.target.getBoundingClientRect().left;
-  let shiftY = event.clientY - event.target.getBoundingClientRect().top;
-
-  function moveAt(pageX, pageY) {
-    event.target.style.left = pageX - shiftX + "px";
-    event.target.style.top = pageY - shiftY + "px";
-  }
-
-  function onMouseMove(event) {
-    moveAt(event.pageX, event.pageY);
-  }
-
-  document.addEventListener("mousemove", onMouseMove);
 }
 
 function clickHandler(event) {
