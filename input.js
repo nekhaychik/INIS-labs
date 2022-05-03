@@ -2,8 +2,18 @@ const BLUE_BACKGROUND = "selected";
 const YELLOW_BACKGROUND = "dbSelected";
 const TARGET_CLASS = ".target";
 
-let selectedDiv;
-let currentDiv;
+const movableTargetElement = null;
+
+let onclickedDiv;
+let dbclickedDiv;
+let currentDiv = {
+  div: null,
+  coords: {
+    X: null,
+    Y: null,
+  }
+};
+
 
 const workspace = document.getElementById("workspace");
 
@@ -16,9 +26,10 @@ workspace.onmousedown = function (event) {
     if (isMouseDown) {
       let target = event.target.closest(TARGET_CLASS);
       if (!target) return;
+      setCoords(event.target);
       moveDiv(event);
     }
-  }, 300);
+  }, 100);
 };
 
 workspace.onclick = function (event) {
@@ -28,7 +39,7 @@ workspace.onclick = function (event) {
       clickHandler(event);
       isMouseDown = true;
     }
-  }, 300);
+  }, 200);
 };
 
 workspace.ondblclick = function (event) {
@@ -37,10 +48,11 @@ workspace.ondblclick = function (event) {
   setTimeout(function () {
     let target = event.target.closest(TARGET_CLASS);
     if (!target) return;
+    setCoords(event.target);
     moveDiv(event);
     isSingleClick = true;
     isMouseDown = true;
-  }, 300);
+  }, 200);
 };
 
 function moveDiv(event) {
@@ -68,8 +80,20 @@ function moveDiv(event) {
     event.target.onmouseup = null;
     workspace.append(event.target);
     if (temp === 0) clickHandler(event);
-    if(event.target.classList.contains(YELLOW_BACKGROUND)) {
-      event.target.classList.remove(YELLOW_BACKGROUND);
+    if (event.target.classList.contains(YELLOW_BACKGROUND)) {
+      removeCoords();
+    }
+    temp = 0;
+  };
+
+  document.onkeydown = function (event) {
+    if (event.code === 'Escape' && currentDiv.div) {
+      document.removeEventListener("mousemove", onMouseMove);
+      currentDiv.div.style.left = currentDiv.coords.X;
+      currentDiv.div.style.top = currentDiv.coords.Y;
+      currentDiv.div.onmouseup = null;
+      workspace.append(currentDiv.div);
+      removeCoords();
     }
     temp = 0;
   };
@@ -78,8 +102,8 @@ function moveDiv(event) {
 function clickHandler(event) {
   let target = event.target.closest(TARGET_CLASS);
   if (!target) {
-    if (selectedDiv) {
-      selectedDiv.classList.remove(BLUE_BACKGROUND);
+    if (onclickedDiv) {
+      onclickedDiv.classList.remove(BLUE_BACKGROUND);
     }
     return;
   }
@@ -93,14 +117,28 @@ function dbClickHandler(event) {
 }
 
 function changeColorDbClick(div) {
-  currentDiv = div;
-  currentDiv.classList.add(YELLOW_BACKGROUND);
+  dbclickedDiv = div;
+  dbclickedDiv.classList.add(YELLOW_BACKGROUND);
 }
 
 function changeColorClick(div) {
-  if (selectedDiv) {
-    selectedDiv.classList.remove(BLUE_BACKGROUND);
+  if (onclickedDiv) {
+    onclickedDiv.classList.remove(BLUE_BACKGROUND);
   }
-  selectedDiv = div;
-  selectedDiv.classList.add(BLUE_BACKGROUND);
+  onclickedDiv = div;
+  onclickedDiv.classList.add(BLUE_BACKGROUND);
+}
+
+function setCoords(elem) {
+  currentDiv.div = elem;
+  currentDiv.coords.X = elem.style.left;
+  currentDiv.coords.Y = elem.style.top;
+}
+
+function removeCoords() {
+  currentDiv.div.classList.remove(YELLOW_BACKGROUND);
+  currentDiv.div = null;
+  currentDiv.coords.X = null;
+  currentDiv.coords.Y = null;
+  dbclickedDiv = null;
 }
