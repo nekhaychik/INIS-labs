@@ -34,3 +34,24 @@ body {
 .dbSelected {
   background-color: yellow;
 }
+
+#first {
+  top: 120px;
+  left: 20px;
+  width: 60px;
+  height: 100px;
+}
+
+#second {
+  top: 250px;
+  left: 50px;
+  width: 150px;
+  height: 80px;
+}
+
+#third {
+  top: 370px;
+  left: 30px;
+  width: 100px;
+  height: 100px;
+}
