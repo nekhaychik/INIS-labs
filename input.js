@@ -155,6 +155,7 @@ let movableTargetElement;
 let moveAtTouch;
 
 let isTouch = false;
+let isDoubleClickMode;
 
 let width;
 let height;
@@ -346,8 +347,6 @@ targetElements.forEach((targetElement) => {
 
               selectedTargetElement = null;
               isDoubleClickMode = false;
-
-              console.log("touchend — target");
             }
           }
         },
