@@ -91,6 +91,7 @@ function moveDiv(event) {
       currentDiv.div.onmouseup = null;
       workspace.append(currentDiv.div);
       removeCoords();
+      selectedTargetElement.style.backgroundColor = INITIAL_TARGET_COLOR;
     }
     temp = 0;
   };
@@ -302,7 +303,7 @@ targetElements.forEach((targetElement) => {
           onTargetTouchmoveListener
         );
       }
-      
+
       isDoubleClickMode = true;
     }
   });
