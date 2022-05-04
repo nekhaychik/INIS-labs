@@ -192,10 +192,7 @@ function onTargetMoveListener(event) {
 
 function onContainerTouchstartListener() {
   if (movableTargetElement) {
-    workspace.removeEventListener(
-      "touchstart",
-      onContainerTouchstartListener
-    );
+    workspace.removeEventListener("touchstart", onContainerTouchstartListener);
     movableTargetElement.removeEventListener(
       "touchmove",
       onTargetTouchmoveListener
@@ -246,14 +243,8 @@ function onTargetTouchmoveListener(event) {
 
 function onTargetTouchstartListener(event) {
   if (event.touches.length === 2) {
-    workspace.removeEventListener(
-      "touchstart",
-      onTargetTouchstartListener
-    );
-    workspace.removeEventListener(
-      "touchmove",
-      onTargetTouchmoveListener
-    );
+    workspace.removeEventListener("touchstart", onTargetTouchstartListener);
+    workspace.removeEventListener("touchmove", onTargetTouchmoveListener);
 
     selectedTargetElement.style.left = x + "px";
     selectedTargetElement.style.top = y + "px";
@@ -265,7 +256,6 @@ function onTargetTouchstartListener(event) {
 }
 
 targetElements.forEach((targetElement) => {
-
   targetElement.addEventListener("dblclick", () => {
     if (!isDoubleClickMode) {
       clearTimeout(timeoutId);
@@ -277,11 +267,34 @@ targetElements.forEach((targetElement) => {
       selectedTargetElement = targetElement;
       selectedTargetElement.style.backgroundColor = MOVABLE_TARGET_COLOR;
 
-      containerElement.addEventListener(
-        "touchstart",
-        onTargetTouchstartListener
-      );
-      containerElement.addEventListener("touchmove", onTargetTouchmoveListener);
+      if (!isTouch) {
+        containerElement.addEventListener("mousemove", onTargetMoveListener);
+
+        targetElement.addEventListener(
+          "click",
+          (event) => {
+            event.stopPropagation();
+
+            containerElement.removeEventListener(
+              "mousemove",
+              onTargetMoveListener
+            );
+            onTargetClickListener(event);
+
+            isDoubleClickMode = false;
+          },
+          EVENT_LISTENER_OPTIONS
+        );
+      } else {
+        containerElement.addEventListener(
+          "touchstart",
+          onTargetTouchstartListener
+        );
+        containerElement.addEventListener(
+          "touchmove",
+          onTargetTouchmoveListener
+        );
+      }
       isDoubleClickMode = true;
     }
   });
@@ -319,10 +332,7 @@ targetElements.forEach((targetElement) => {
         );
       }
 
-      workspace.addEventListener(
-        "touchstart",
-        onContainerTouchstartListener
-      );
+      workspace.addEventListener("touchstart", onContainerTouchstartListener);
       targetElement.addEventListener("touchmove", onTargetTouchmoveListener);
 
       targetElement.addEventListener(
