@@ -140,7 +140,8 @@ function removeCoords() {
   dbclickedDiv = null;
 }
 
-const targetElements = document.querySelectorAll(TARGET_CLASS);
+const containerElement = document.getElementById("workspace");
+const targetElements = document.querySelectorAll(".target");
 
 const INITIAL_TARGET_COLOR = "red";
 const SELECTED_TARGET_COLOR = "blue";
@@ -155,7 +156,7 @@ let selectedTargetElement;
 let x, y;
 
 let movableTargetElement;
-let moveAtTouch;
+let moveAt;
 
 let isTouch = false;
 let isDoubleClickMode;
@@ -185,14 +186,30 @@ function computeDistance(x1, y1, x2, y2) {
   return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }
 
+function onTargetClickListener(event) {
+  const targetElement = event.target;
+  if (!isDoubleClickMode) {
+    if (targetElement !== selectedTargetElement) {
+      selectedTargetElement = targetElement;
+    }
+  } else {
+    selectedTargetElement = null;
+    movableTargetElement = null;
+    isDoubleClickMode = false;
+  }
+}
+
 function onTargetMoveListener(event) {
   movableTargetElement = event.target;
-  moveAtTouch(event.pageX, event.pageY);
+  moveAt(event.pageX, event.pageY);
 }
 
 function onContainerTouchstartListener() {
   if (movableTargetElement) {
-    workspace.removeEventListener("touchstart", onContainerTouchstartListener);
+    containerElement.removeEventListener(
+      "touchstart",
+      onContainerTouchstartListener
+    );
     movableTargetElement.removeEventListener(
       "touchmove",
       onTargetTouchmoveListener
@@ -243,8 +260,14 @@ function onTargetTouchmoveListener(event) {
 
 function onTargetTouchstartListener(event) {
   if (event.touches.length === 2) {
-    workspace.removeEventListener("touchstart", onTargetTouchstartListener);
-    workspace.removeEventListener("touchmove", onTargetTouchmoveListener);
+    containerElement.removeEventListener(
+      "touchstart",
+      onTargetTouchstartListener
+    );
+    containerElement.removeEventListener(
+      "touchmove",
+      onTargetTouchmoveListener
+    );
 
     selectedTargetElement.style.left = x + "px";
     selectedTargetElement.style.top = y + "px";
@@ -260,13 +283,16 @@ targetElements.forEach((targetElement) => {
     if (!isDoubleClickMode) {
       clearTimeout(timeoutId);
       timeoutId = null;
-      if (isTouch) {
-        if (selectedTargetElement) {
-          selectedTargetElement.style.backgroundColor = INITIAL_TARGET_COLOR;
-        }
-        selectedTargetElement = targetElement;
-        selectedTargetElement.style.backgroundColor = MOVABLE_TARGET_COLOR;
 
+      if (selectedTargetElement) {
+        selectedTargetElement.style.backgroundColor = INITIAL_TARGET_COLOR;
+      }
+      selectedTargetElement = targetElement;
+      selectedTargetElement.style.backgroundColor = MOVABLE_TARGET_COLOR;
+
+      if (!isTouch) {
+        return;
+      } else {
         containerElement.addEventListener(
           "touchstart",
           onTargetTouchstartListener
@@ -276,7 +302,7 @@ targetElements.forEach((targetElement) => {
           onTargetTouchmoveListener
         );
       }
-
+      
       isDoubleClickMode = true;
     }
   });
@@ -296,7 +322,7 @@ targetElements.forEach((targetElement) => {
         return;
       }
 
-      moveAtTouch = targetMovement(touch, targetElement);
+      moveAt = targetMovement(touch, targetElement);
 
       if (event.touches.length === 2) {
         const rect = targetElement.getBoundingClientRect();
@@ -314,13 +340,16 @@ targetElements.forEach((targetElement) => {
         );
       }
 
-      workspace.addEventListener("touchstart", onContainerTouchstartListener);
+      containerElement.addEventListener(
+        "touchstart",
+        onContainerTouchstartListener
+      );
       targetElement.addEventListener("touchmove", onTargetTouchmoveListener);
 
       targetElement.addEventListener(
         "touchend",
         () => {
-          workspace.removeEventListener(
+          containerElement.removeEventListener(
             "touchstart",
             onContainerTouchstartListener
           );
@@ -335,7 +364,7 @@ targetElements.forEach((targetElement) => {
       );
     } else {
       if (targetElement === selectedTargetElement) {
-        moveAtTouch = targetMovement(touch, targetElement);
+        moveAt = targetMovement(touch, targetElement);
       }
 
       targetElement.addEventListener(
@@ -349,11 +378,11 @@ targetElements.forEach((targetElement) => {
 
             const touch = event.changedTouches[0];
             if (touch.target === selectedTargetElement) {
-              workspace.removeEventListener(
+              containerElement.removeEventListener(
                 "touchstart",
                 onTargetTouchstartListener
               );
-              workspace.removeEventListener(
+              containerElement.removeEventListener(
                 "touchmove",
                 onTargetTouchmoveListener
               );
