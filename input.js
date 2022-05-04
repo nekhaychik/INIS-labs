@@ -260,32 +260,13 @@ targetElements.forEach((targetElement) => {
     if (!isDoubleClickMode) {
       clearTimeout(timeoutId);
       timeoutId = null;
+      if (isTouch) {
+        if (selectedTargetElement) {
+          selectedTargetElement.style.backgroundColor = INITIAL_TARGET_COLOR;
+        }
+        selectedTargetElement = targetElement;
+        selectedTargetElement.style.backgroundColor = MOVABLE_TARGET_COLOR;
 
-      if (selectedTargetElement) {
-        selectedTargetElement.style.backgroundColor = INITIAL_TARGET_COLOR;
-      }
-      selectedTargetElement = targetElement;
-      selectedTargetElement.style.backgroundColor = MOVABLE_TARGET_COLOR;
-
-      if (!isTouch) {
-        containerElement.addEventListener("mousemove", onTargetMoveListener);
-
-        targetElement.addEventListener(
-          "click",
-          (event) => {
-            event.stopPropagation();
-
-            containerElement.removeEventListener(
-              "mousemove",
-              onTargetMoveListener
-            );
-            onTargetClickListener(event);
-
-            isDoubleClickMode = false;
-          },
-          EVENT_LISTENER_OPTIONS
-        );
-      } else {
         containerElement.addEventListener(
           "touchstart",
           onTargetTouchstartListener
@@ -295,6 +276,7 @@ targetElements.forEach((targetElement) => {
           onTargetTouchmoveListener
         );
       }
+
       isDoubleClickMode = true;
     }
   });
