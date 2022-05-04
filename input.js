@@ -152,7 +152,7 @@ let selectedTargetElement;
 let x, y;
 
 let movableTargetElement;
-let moveAt;
+let moveAtTouch;
 
 let isTouch = false;
 
@@ -181,6 +181,11 @@ function computeDistance(x1, y1, x2, y2) {
   return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }
 
+function onTargetMoveListener(event) {
+  movableTargetElement = event.target;
+  moveAtTouch(event.pageX, event.pageY);
+}
+
 function onContainerTouchstartListener() {
   if (movableTargetElement) {
     workspace.removeEventListener(
@@ -196,8 +201,6 @@ function onContainerTouchstartListener() {
     movableTargetElement.style.top = y + "px";
 
     movableTargetElement = null;
-
-    console.log("touchstart — container");
   }
 }
 
@@ -273,7 +276,7 @@ targetElements.forEach((targetElement) => {
         return;
       }
 
-      moveAt = targetMovement(touch, targetElement);
+      moveAtTouch = targetMovement(touch, targetElement);
 
       if (event.touches.length === 2) {
         const rect = targetElement.getBoundingClientRect();
@@ -310,14 +313,12 @@ targetElements.forEach((targetElement) => {
           );
 
           movableTargetElement = null;
-
-          console.log("touchend — target");
         },
         EVENT_LISTENER_OPTIONS
       );
     } else {
       if (targetElement === selectedTargetElement) {
-        moveAt = targetMovement(touch, targetElement);
+        moveAtTouch = targetMovement(touch, targetElement);
       }
 
       targetElement.addEventListener(
@@ -355,7 +356,5 @@ targetElements.forEach((targetElement) => {
     }
 
     isTouch = true;
-
-    console.log("touchstart — target");
   });
 });
