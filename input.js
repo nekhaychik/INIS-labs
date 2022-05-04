@@ -148,6 +148,9 @@ const MOVABLE_TARGET_COLOR = "yellow";
 
 const EVENT_LISTENER_OPTIONS = { once: true };
 
+const TIMEOUT_LIMIT = 250;
+let timeoutId;
+
 let selectedTargetElement;
 let x, y;
 
@@ -262,6 +265,27 @@ function onTargetTouchstartListener(event) {
 }
 
 targetElements.forEach((targetElement) => {
+
+  targetElement.addEventListener("dblclick", () => {
+    if (!isDoubleClickMode) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+
+      if (selectedTargetElement) {
+        selectedTargetElement.style.backgroundColor = INITIAL_TARGET_COLOR;
+      }
+      selectedTargetElement = targetElement;
+      selectedTargetElement.style.backgroundColor = MOVABLE_TARGET_COLOR;
+
+      containerElement.addEventListener(
+        "touchstart",
+        onTargetTouchstartListener
+      );
+      containerElement.addEventListener("touchmove", onTargetTouchmoveListener);
+      isDoubleClickMode = true;
+    }
+  });
+
   targetElement.addEventListener("touchstart", (event) => {
     event.stopPropagation();
 
