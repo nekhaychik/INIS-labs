@@ -302,6 +302,8 @@ targetElements.forEach((targetElement) => {
           "touchmove",
           onTargetTouchmoveListener
         );
+        selectedTargetElement.style.backgroundColor = INITIAL_TARGET_COLOR;
+        selectedTargetElement = null;
       }
 
       isDoubleClickMode = true;
