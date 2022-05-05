@@ -292,6 +292,7 @@ targetElements.forEach((targetElement) => {
       selectedTargetElement.style.backgroundColor = MOVABLE_TARGET_COLOR;
 
       if (!isTouch) {
+        isDoubleClickMode = false;
         return;
       } else {
         containerElement.addEventListener(
